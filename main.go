@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 )
@@ -14,7 +15,25 @@ func main() {
 		w.Write([]byte("Hello Github"))
 	})
 
-	if err := http.ListenAndServe(":6565", r); err != nil {
+	srv := &http.Server{
+		Addr:    ":6555",
+		Handler: r,
+	}
+
+	go func() {
+		if err := srv.ListenAndServe(); err != nil {
+			log.Fatal(err)
+		}
+	}()
+
+	timer := time.NewTimer(1 * time.Minute)
+
+	<-timer.C
+
+	// Stop the server gracefully
+	if err := srv.Shutdown(nil); err != nil {
 		log.Fatal(err)
 	}
+
+	log.Println("Server gracefully stopped.")
 }
