@@ -9,16 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      # - name: Setting Go 
-        # uses: actions/setup-go@v4
-        # with:
-          # go-version: '1.19'
-      - name: Hello Shell
         run: echo "Hello CI-CD"
-        # run: go build -v .
-      # - name: Running Go Application
-        # run: ./golang
-
         env:
           DEFAULT_BRANCH: main 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
