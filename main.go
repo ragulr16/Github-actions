@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gorilla/mux"
@@ -26,14 +27,30 @@ func main() {
 		}
 	}()
 
-	timer := time.NewTimer(1 * time.Minute)
+	// Use a boolean flag to track whether the application should exit
+	// Create a channel to receive an exit signal
+	exit := make(chan struct{})
 
-	<-timer.C
+	// Set a timer for 2 minutes
+	timer := time.NewTimer(2 * time.Minute)
 
-	// Stop the server gracefully
-	if err := srv.Shutdown(nil); err != nil {
-		log.Fatal(err)
+	// Start a goroutine to wait for the timer and send an exit signal
+	go func() {
+		<-timer.C
+		close(exit)
+	}()
+
+	// Wait for the exit signal or the application to be forcefully exited
+	select {
+	case <-exit:
+		// Stop the server gracefully
+		if err := srv.Shutdown(nil); err != nil {
+			log.Fatal(err)
+		}
+		log.Println("Server gracefully stopped.")
+	case <-time.After(0):
 	}
 
-	log.Println("Server gracefully stopped.")
+	// Exit the application without displaying the warning message
+	os.Exit(0)
 }
