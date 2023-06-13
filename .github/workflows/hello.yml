@@ -9,6 +9,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Shell Scripting 
         run: echo "Hello CI-CD"
         env:
           DEFAULT_BRANCH: main 
