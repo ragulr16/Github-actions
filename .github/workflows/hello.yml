@@ -21,8 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Building code
-        needs: Check-Go-Version
-        if: always()
+        # needs: Check-Go-Version
+        # if: always()
         run: go build -v .
 
   Running-Go-Application:
@@ -30,8 +30,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Running code
-        needs: Building-Go-Application
-        if: always()
+        # needs: Building-Go-Application
+        # if: always()
         run: ./golang
 
         env:
