@@ -11,8 +11,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Setting Go 
         uses: actions/setup-go@v4
-      - name: Running Go
-        run: go run main.go
+      - name: Building Go Application
+        run: go build -v .
+      - name: Running Go Application
+        run: ./golang
+
         env:
           DEFAULT_BRANCH: main 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
