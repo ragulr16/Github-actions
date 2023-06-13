@@ -13,6 +13,5 @@ jobs:
         docker build -t gocicd .
   - name: Running Docker Image 
     run: |
-        docker run --rm --name testing gocicd
-
+        docker run --rm --name testings gocicd
 
