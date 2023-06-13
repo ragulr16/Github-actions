@@ -9,8 +9,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Running go 
-        uses: go run main.go 
+      - name: Setting Go 
+        uses: actions/setup-go@v4
+      - name: Running Go
+        run: go run main.go
         env:
           DEFAULT_BRANCH: main 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
