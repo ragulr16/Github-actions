@@ -6,12 +6,12 @@ jobs:
   Dockerizing-Go:
   runs-on: ubuntu-latest
   steps:
-  - name: Checkout
-    uses: actions/checkout@v2
-  - name: Building Docker Image
-    run: | 
+   - name: Checkout
+     uses: actions/checkout@v2
+   - name: Building Docker Image
+     run: | 
         docker build -t gocicd .
-  - name: Running Docker Image 
-    run: |
+   - name: Running Docker Image
+     run: |
         docker run --rm --name testings gocicd
 
