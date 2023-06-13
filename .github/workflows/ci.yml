@@ -15,4 +15,9 @@ jobs:
     - name: Running Docker Image
       run: |
           docker run --rm --name testings gocicd
-
+    - name: Viewing all docker images 
+      run: |
+          docker images ls   
+    - name: Deleting the docker image
+      run: |
+          docker rmi -f gocicd
