@@ -1,0 +1,17 @@
+name: Hello-World
+
+on: push
+
+jobs:
+  go-run:
+    name: Testing github actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Running go 
+        uses: go run main.go 
+        env:
+          DEFAULT_BRANCH: main 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
